@@ -50,3 +50,25 @@ export const TrackImage = styled.img`
   max-width: 90px;
   border-radius: 6px;
 `;
+
+export const LoadingMessage = styled.p`
+  text-align: center;
+`;
+
+export const ContentContainer = styled.div`
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+`;
+
+export const DetailText = styled.span`
+  color: #a9a9a9;
+  font-weight: 500;
+`;
+
+export const Heading = styled.h2`
+  color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 15px;
+`;

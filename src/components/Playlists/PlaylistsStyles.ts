@@ -49,3 +49,8 @@ export const DropdownSelect = styled.select`
     color: #ffffff;
   }
 `;
+
+export const NoPlaylistsMessage = styled.p`
+  color: #666;
+  font-style: italic;
+`;
