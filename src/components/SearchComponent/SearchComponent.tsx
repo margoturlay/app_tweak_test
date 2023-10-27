@@ -13,6 +13,9 @@ import {
   SearchResultsList
 } from "./SearchCompnentStyles";
 
+import { useSelector } from "react-redux";
+import { authSelectors } from "../../containers/auth/selectors";
+
 const debounce = (func: (...args: any[]) => void, delay: number): ((...args: any[]) => void) => {
   let timer: ReturnType<typeof setTimeout> | null = null;
   return (...args: any[]) => {
@@ -25,9 +28,10 @@ const debounce = (func: (...args: any[]) => void, delay: number): ((...args: any
   };
 };
 const SearchComponent: React.FC = () => {
+  const accessToken = useSelector(authSelectors.getAccessToken);
   const [searchInput, setSearchInput] = useState<string>("");
   const { data: searchTrackData, isLoading } = useGetSearchTrackResultQuery(searchInput, {
-    skip: !searchInput
+    skip: !searchInput || !accessToken
   });
 
   useEffect(() => {
