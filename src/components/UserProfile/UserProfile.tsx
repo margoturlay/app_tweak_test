@@ -1,5 +1,8 @@
 import React from "react";
 import { useGetUserQuery } from "../../api/apiSlice";
+import { authSelectors } from "../../containers/auth/selectors";
+import { useSelector } from "react-redux";
+
 import {
   ProfileContainer,
   ProfileImage,
@@ -10,7 +13,10 @@ import {
 } from "./UserProfileStyles";
 
 function UserProfile() {
-  const { data, error, isLoading } = useGetUserQuery();
+  const accessToken = useSelector(authSelectors.getAccessToken);
+  const { data, error, isLoading } = useGetUserQuery(undefined, {
+    skip: !accessToken
+  });
 
   if (isLoading) return <FeedbackMessage>Loading...</FeedbackMessage>;
   if (error && "message" in error) return <ErrorMessage>Error: {error.message}</ErrorMessage>;

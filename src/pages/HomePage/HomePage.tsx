@@ -22,12 +22,13 @@ import {
 const HomePage: FC = (): ReactElement => {
   const accessToken = useSelector(authSelectors.getAccessToken);
 
-  useGetUserQuery(undefined, {
+  const { data } = useGetUserQuery(undefined, {
     skip: !accessToken
   });
 
-  const { data: playlistsData } = useGetPlaylistsQuery();
-
+  const { data: playlistsData } = useGetPlaylistsQuery(undefined, {
+    skip: !accessToken
+  });
   const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(null);
 
   const {
@@ -35,7 +36,7 @@ const HomePage: FC = (): ReactElement => {
     isLoading: tracksLoading,
     isError: tracksError
   } = useGetPlaylistTracksQuery(selectedPlaylistId || "", {
-    skip: !selectedPlaylistId
+    skip: !selectedPlaylistId || !accessToken
   });
 
   const handlePlaylistSelect = (playlistId: string | null) => {
