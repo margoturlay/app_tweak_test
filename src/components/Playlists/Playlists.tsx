@@ -1,5 +1,5 @@
 import React from "react";
-import { MainContainer, DropdownSelect, Header } from "./PlaylistsStyles";
+import { MainContainer, DropdownSelect, Header, NoPlaylistsMessage } from "./PlaylistsStyles";
 
 interface Playlist {
   id: string;
@@ -36,7 +36,7 @@ const UserPlaylists: React.FC<UserPlaylistsProps> = ({ playlists, onSelect }) =>
           ))}
         </DropdownSelect>
       ) : (
-        <p>No playlists found. Please add some on Spotify!</p>
+        <NoPlaylistsMessage>No playlists found. Please add some on Spotify!</NoPlaylistsMessage>
       )}
     </MainContainer>
   );

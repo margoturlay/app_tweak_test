@@ -16,7 +16,11 @@ import {
   TrackName,
   AlbumName,
   ReleaseDate,
-  TrackImage
+  TrackImage,
+  LoadingMessage,
+  ContentContainer,
+  DetailText,
+  Heading
 } from "./HomePageStyles";
 
 const HomePage: FC = (): ReactElement => {
@@ -58,8 +62,8 @@ const HomePage: FC = (): ReactElement => {
       {selectedPlaylistId && (
         <>
           {tracksData && !tracksError && (
-            <div>
-              <h2>Tracks in Playlist:</h2>
+            <ContentContainer>
+              <Heading>Tracks in Playlist:</Heading>
               {(tracksData as any).items.map((trackItem: any) => (
                 <PlaylistTrackItem key={trackItem.track.id}>
                   <TrackImage
@@ -68,19 +72,22 @@ const HomePage: FC = (): ReactElement => {
                   />
                   <TrackDetails>
                     <TrackName>{trackItem.track.name}</TrackName>
-                    <AlbumName>Album: {trackItem.track.album.name}</AlbumName>
-                    <ReleaseDate>{trackItem.track.album.release_date}</ReleaseDate>
+                    <AlbumName>
+                      Album: <DetailText>{trackItem.track.album.name}</DetailText>
+                    </AlbumName>
+                    <ReleaseDate>
+                      Release Date: <DetailText>{trackItem.track.album.release_date}</DetailText>
+                    </ReleaseDate>
                   </TrackDetails>
                 </PlaylistTrackItem>
               ))}
-            </div>
+            </ContentContainer>
           )}
-          {tracksLoading && <p>Loading tracks...</p>}
-          {tracksError && <p>Error loading tracks.</p>}
+          {tracksLoading && <LoadingMessage>Loading tracks...</LoadingMessage>}
+          {tracksError && <LoadingMessage>Error loading tracks.</LoadingMessage>}
         </>
       )}
     </AppContainer>
   );
 };
-
 export default HomePage;
